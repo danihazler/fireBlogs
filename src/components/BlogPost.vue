@@ -1,40 +1,52 @@
 <template>
-    <div class="blog-wrapper no-user">
-        <div class="blog-content">
-            <div>
-                <h2 v-if="post.welcomeScreen">{{post.title}}</h2>
-                <h2 v-else>{{post.title}}</h2>
-                <p v-if="post.welcomeScreen">{{post.blogPost}}</p>
-                <p v-else class="content-preview">{{post.blogHTML}}</p>
-                <router-link class="link link-light" v-if="post.welcomeScreen" to="#">
-                    Login/Register<Arrow />
-                </router-link>
-                <router-link class="link" v-else to="#">
-                    View the post<Arrow />
-                </router-link>
-            </div>
-        </div>
-        <div class="blog-photo">
-            <img v-if="post.welcomeScreen" :src="require(`../assets/blogPhotos/${post.photo}`)" alt="" />
-            <img v-else :src="require(`../assets/blogPhotos/${post.blogCoverPhoto}`)" alt="" />
-        </div>
-        </div>
+  <div class="blog-wrapper" :class="{ 'no-user': !user }">
+    <div class="blog-content">
+      <div>
+        <h2 v-if="post.welcomeScreen">{{ post.title }}</h2>
+        <h2 v-else>{{ post.title }}</h2>
+        <p v-if="post.welcomeScreen">{{ post.blogPost }}</p>
+        <p v-else class="content-preview">{{ post.blogHTML }}</p>
+        <router-link class="link link-light" v-if="post.welcomeScreen" to="#">
+          Login/Register<Arrow />
+        </router-link>
+        <router-link class="link" v-else to="#">
+          View the post<Arrow />
+        </router-link>
+      </div>
+    </div>
+    <div class="blog-photo">
+      <img
+        v-if="post.welcomeScreen"
+        :src="require(`../assets/blogPhotos/${post.photo}`)"
+        alt=""
+      />
+      <img
+        v-else
+        :src="require(`../assets/blogPhotos/${post.blogCoverPhoto}`)"
+        alt=""
+      />
+    </div>
+  </div>
 </template>
 
 <script>
-import Arrow from '../assets/Icons/arrow-right-light.svg';
+import Arrow from "../assets/Icons/arrow-right-light.svg";
 
 export default {
-    name: 'BlogPost',
-    props : ['post'],
-    components: {
-        Arrow
-    }
-}
+  name: "BlogPost",
+  props: ["post"],
+  components: {
+    Arrow,
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
+};
 </script>
 
 <style lang='scss' scoped>
-
 .blog-wrapper {
   display: flex;
   flex-direction: column;
@@ -56,7 +68,7 @@ export default {
       order: 1;
     }
     @media (min-width: 800px) {
-      flex:3;
+      flex: 3;
     }
     div {
       max-width: 375px;
@@ -64,8 +76,8 @@ export default {
     }
 
     svg {
-        margin-left: 8px;
-        width: 12px;
+      margin-left: 8px;
+      width: 12px;
     }
     h2 {
       font-size: 32px;
@@ -115,14 +127,14 @@ export default {
     @media (min-width: 800px) {
       flex: 4;
     }
-    img{
+    img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
-  &:nth-child(even){
+  &:nth-child(even) {
     .blog-content {
       order: 2;
     }
@@ -137,5 +149,4 @@ export default {
     color: #fff;
   }
 }
-
 </style>

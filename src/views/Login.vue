@@ -23,6 +23,10 @@
         Forgot your password?
       </router-link>
       <button @click.prevent="signIn">Sign in</button>
+      <br />
+      <router-link class="router-link" :to="{ name: 'Home' }">
+        Back Home
+      </router-link>
       <div class="angle" />
     </form>
     <div class="background" />

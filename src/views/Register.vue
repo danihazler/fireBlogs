@@ -32,6 +32,10 @@
         <div class="error" v-show="hasError">{{ this.errorMsg }}</div>
       </div>
       <button @click.prevent="register">Sign up</button>
+      <br />
+      <router-link class="router-link" :to="{ name: 'Home' }">
+        Back Home
+      </router-link>
       <div class="angle" />
     </form>
     <div class="background" />
