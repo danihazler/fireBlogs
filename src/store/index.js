@@ -9,10 +9,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     sampleBlogCards: [
-      { blogTitle: 'Card 1', blogCoverPhoto: 'stock-1', blogDate: 'May 1, 2021' },
-      { blogTitle: 'Card 2', blogCoverPhoto: 'stock-2', blogDate: 'May 1, 2021' },
-      { blogTitle: 'Card 3', blogCoverPhoto: 'stock-3', blogDate: 'May 1, 2021' },
-      { blogTitle: 'Card 4', blogCoverPhoto: 'stock-4', blogDate: 'May 1, 2021' },
+      { blogTitle: 'Card Title 1', blogCoverPhoto: 'stock-1', blogDate: 'May 1, 2021' },
+      { blogTitle: 'Card Title 2', blogCoverPhoto: 'stock-2', blogDate: 'May 1, 2021' },
+      { blogTitle: 'Card Title 3', blogCoverPhoto: 'stock-3', blogDate: 'May 1, 2021' },
+      { blogTitle: 'Card Title 4', blogCoverPhoto: 'stock-4', blogDate: 'May 1, 2021' },
     ],
     editPost: null,
     user: null,
@@ -41,6 +41,18 @@ export default new Vuex.Store({
     setProfileInitials(state) {
       state.profileInitials =
         state.profileName.match(/(\b\S)?/g).join("") + state.profileSurname.match(/(\b\S)?/g).join("");
+    },
+    changeName(state, payload) {
+      state.profileName = payload
+    },
+    changeSurname(state, payload) {
+      state.profileSurname = payload
+    },
+    changeUserName(state, payload) {
+      state.profileUserName = payload
+    },
+    changeEmail(state, payload) {
+      state.profileEmail = payload
     }
   },
   actions: {
@@ -48,6 +60,16 @@ export default new Vuex.Store({
       const dataBase = await db.collection('users').doc(firebase.auth().currentUser.uid);
       const dbResults = await dataBase.get();
       commit('setProfileInfo', dbResults);
+      commit('setProfileInitials');
+    },
+    async updateUserSettings({ commit, state }) {
+      const dataBase = await db.collection('users').doc(state.profileId);
+      await dataBase.update({
+        name: state.profileName,
+        surname: state.profileSurname,
+        userName: state.profileUserName,
+        email: state.profileEmail
+      });
       commit('setProfileInitials');
     }
   },
