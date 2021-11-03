@@ -9,7 +9,9 @@
       <div class="nav-links" v-show="!isMobile">
         <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
         <router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
-        <router-link class="link" :to="{ name: '#' }">Create Post</router-link>
+        <router-link v-if="user" class="link" :to="{ name: '#' }"
+          >Create Post</router-link
+        >
         <router-link v-if="!user" class="link" :to="{ name: 'Login' }">
           Login/Register
         </router-link>
@@ -62,7 +64,9 @@
       <div class="mobile-nav" v-show="isMobile && isMobileNavOpen">
         <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
         <router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
-        <router-link class="link" :to="{ name: '#' }">Create Post</router-link>
+        <router-link v-if="user" class="link" :to="{ name: '#' }"
+          >Create Post</router-link
+        >
         <router-link v-if="!user" class="link" :to="{ name: 'Login' }">
           Login/Register
         </router-link>

@@ -6,6 +6,7 @@ import Admin from "../views/Admin.vue";
 import Profile from "../views/Profile.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import CreatePost from "../views/CreatePost.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -46,6 +47,15 @@ const routes = [
     component: Admin,
     meta: {
       title: 'Admin',
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/create-post",
+    name: "CreatePost",
+    component: CreatePost,
+    meta: {
+      title: 'Create Post',
       requiresAuth: true
     }
   },
